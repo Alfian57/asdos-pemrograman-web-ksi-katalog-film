@@ -32,6 +32,11 @@ Route::get('/tentang-kami', function () {
     return view('tentang-kami');
 });
 
+// Route untuk menampilkan halaman tentang kami
+Route::get('/harga', function () {
+    return view('harga');
+});
+
 // Route untuk menampilkan nama kelas
 Route::get('/kelas', function () {
     return 'Kelas PWeb KSI';
