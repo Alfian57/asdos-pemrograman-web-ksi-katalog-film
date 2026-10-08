@@ -34,5 +34,5 @@ Route::get('/tentang-kami', function () {
 
 // Route untuk menampilkan nama kelas
 Route::get('/kelas', function () {
-    return 'Kelas Alpro';
+    return 'Kelas PWeb KSI';
 });
