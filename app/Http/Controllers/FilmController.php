@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Film;
+
 class FilmController extends Controller
 {
     public function index()
     {
         return view('films', [
-            'filmTersedia' => true,
-            'filmList' => ['Laskar Pelangi', '5 sentimeter', 'Avenger Doomsday'],
+            'filmList' => Film::all(),
         ]);
     }
 
