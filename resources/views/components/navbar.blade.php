@@ -26,6 +26,7 @@
                         ['href' => route('films'), 'label' => 'Film'],
                         ['href' => route('tentangKami'), 'label' => 'Tentang Kami'],
                         ['href' => route('harga'), 'label' => 'Harga'],
+                        ['href' => route('logout'), 'label' => 'Logout'],
                     ];
                 @endphp
 
