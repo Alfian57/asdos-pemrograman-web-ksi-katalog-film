@@ -5,6 +5,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilmController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 // Route untuk menampilkan halaman welcome
 Route::get('/welcome', function () {
     return view('welcome');

@@ -1,78 +1,61 @@
-<nav class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm shadow-lg shadow-black/20 border-b border-white/5">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-
-            {{-- Brand / Logo --}}
-            <a href="{{ route('dashboard') }}" class="flex items-center gap-2 group">
-                <div
-                    class="w-8 h-8 rounded-lg bg-indigo-500 flex items-center justify-center shrink-0 group-hover:bg-indigo-400 transition-colors duration-200">
-                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M3.5 4.5A.5.5 0 0 1 4 4h16a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5v-1ZM2 8a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8Zm7.5 2.5a.5.5 0 0 0-.8.4v6.2a.5.5 0 0 0 .8.4l4.5-3.1a.5.5 0 0 0 0-.8L9.5 10.5Z" />
-                    </svg>
-                </div>
-                <span
-                    class="text-white font-bold text-lg tracking-tight group-hover:text-indigo-300 transition-colors duration-200">
-                    KatalogFilm
-                </span>
+<nav class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 shadow-sm shadow-slate-900/5 backdrop-blur-xl">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-[4.5rem] items-center justify-between gap-4">
+            <a href="{{ route('dashboard') }}" class="group inline-flex shrink-0 items-center gap-3 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-600">
+                <img src="{{ asset('images/katalogfilm-logo.png') }}" alt="" aria-hidden="true" class="h-10 w-10 object-contain transition duration-200 group-hover:-rotate-3 group-hover:scale-105">
+                <span class="text-lg font-bold tracking-tight text-slate-900 transition-colors group-hover:text-red-700 sm:text-xl">Katalog<span class="text-red-600">Film</span></span>
             </a>
 
-            {{-- Nav Links --}}
-            <ul class="hidden sm:flex items-center gap-1">
-                @php
-                    $currentPath = request()->path();
-                    $links = [
-                        ['href' => route('dashboard'), 'label' => 'Beranda'],
-                        ['href' => route('films'), 'label' => 'Film'],
-                        ['href' => route('tentangKami'), 'label' => 'Tentang Kami'],
-                        ['href' => route('harga'), 'label' => 'Harga'],
-                        ['href' => route('logout'), 'label' => 'Logout'],
-                    ];
-                @endphp
+            @php
+                $links = [
+                    ['href' => route('dashboard'), 'routeName' => 'dashboard', 'label' => 'Beranda'],
+                    ['href' => route('films'), 'routeName' => 'films', 'label' => 'Film'],
+                    ['href' => route('tentangKami'), 'routeName' => 'tentangKami', 'label' => 'Tentang Kami'],
+                    ['href' => route('harga'), 'routeName' => 'harga', 'label' => 'Harga'],
+                    ['href' => route('logout'), 'routeName' => 'logout', 'label' => 'Logout'],
+                ];
+            @endphp
 
+            <ul class="hidden items-center gap-1 rounded-2xl border border-slate-200 bg-slate-50 p-1 sm:flex">
                 @foreach ($links as $link)
                     @php
-                        $isActive = '/' . $currentPath === $link['href'];
+                        $isActive = request()->routeIs($link['routeName']);
+                        $linkColor = $link['routeName'] === 'logout'
+                            ? 'text-red-600 hover:bg-red-50 hover:text-red-700'
+                            : 'text-slate-600 hover:bg-white hover:text-slate-900';
                     @endphp
                     <li>
                         <a href="{{ $link['href'] }}"
-                            class="relative px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 group
-                                  {{ $isActive ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
+                            class="rounded-xl px-3.5 py-2 text-sm font-medium transition duration-200 {{ $isActive ? 'bg-white text-red-700 shadow-sm ring-1 ring-slate-200/80' : $linkColor }}">
                             {{ $link['label'] }}
-                            @if ($isActive)
-                                <span
-                                    class="absolute bottom-0.5 left-4 right-4 h-0.5 rounded-full bg-indigo-400"></span>
-                            @endif
                         </a>
                     </li>
                 @endforeach
             </ul>
 
-            {{-- Mobile menu button --}}
             <button type="button"
-                class="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 transition-colors duration-200"
+                class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white p-2.5 text-slate-600 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 sm:hidden"
                 aria-label="Buka menu"
                 onclick="this.closest('nav').querySelector('#mobile-menu').classList.toggle('hidden')">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
                 </svg>
             </button>
-
         </div>
     </div>
 
-    {{-- Mobile Menu --}}
-    <div id="mobile-menu" class="sm:hidden hidden border-t border-white/10 bg-gray-900">
-        <ul class="px-4 py-3 flex flex-col gap-1">
+    <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white px-4 py-3 sm:hidden">
+        <ul class="mx-auto flex max-w-7xl flex-col gap-1">
             @foreach ($links as $link)
-                @php $isActive = ('/' . $currentPath) === $link['href']; @endphp
+                @php
+                    $isActive = request()->routeIs($link['routeName']);
+                    $linkColor = $link['routeName'] === 'logout'
+                        ? 'text-red-600 hover:bg-red-50 hover:text-red-700'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900';
+                @endphp
                 <li>
                     <a href="{{ $link['href'] }}"
-                        class="block px-4 py-2.5 text-sm font-medium rounded-md transition-colors duration-200
-                              {{ $isActive
-                                  ? 'text-white bg-indigo-500/20 border-l-2 border-indigo-400 pl-3.5'
-                                  : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
+                        class="block rounded-xl px-4 py-3 text-sm font-medium transition duration-200 {{ $isActive ? 'bg-red-50 text-red-700' : $linkColor }}">
                         {{ $link['label'] }}
                     </a>
                 </li>
