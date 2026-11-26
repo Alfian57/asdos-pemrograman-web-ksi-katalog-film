@@ -7,6 +7,11 @@
                 <div aria-hidden="true" class="mt-6 h-1 w-16 rounded-full bg-gradient-to-r from-red-500 to-red-300"></div>
             </header>
 
+            <div class="flex justify-end mb-5">
+                <a href="{{ route('films.create') }}" class="bg-red-500 px-3 py-2 rounded-2xl text-white font-bold">Tambah
+                    film</a>
+            </div>
+
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 @foreach ($filmList as $film)
                     <x-card :film="$film" />

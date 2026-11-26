@@ -35,7 +35,12 @@ Route::middleware('auth')->group(function () {
 
     // Route untuk menampilkan daftar film
     Route::get('/films', [FilmController::class, 'index'])->name('films');
-    Route::get('/films/{id}', [FilmController::class, 'show']);
+    Route::get('/films/create', [FilmController::class, 'create'])->name('films.create');
+    Route::post('/films', [FilmController::class, 'store'])->name('films.store');
+    Route::get('/films/{film}/edit', [FilmController::class, 'edit'])->name('films.edit');
+    Route::put('/films/{film}', [FilmController::class, 'update'])->name('films.update');
+    Route::delete('/films/{film}', [FilmController::class, 'destroy'])->name('films.destroy');
+    Route::get('/films/{film}', [FilmController::class, 'show']);
 
     // Route untuk menampilkan halaman tentang kami
     Route::get('/tentang-kami', [DashboardController::class, 'tentangKami'])->name('tentangKami');
